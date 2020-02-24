@@ -55,6 +55,7 @@ const Home = ({ getNotes, data = [], addNote, t }) => {
             </InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl
+            className="add-title"
             aria-describedby="basic-addon1"
             onChange={e => setTitle(e.target.value)}
             required
@@ -68,6 +69,7 @@ const Home = ({ getNotes, data = [], addNote, t }) => {
             </InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl
+            className="add-description"
             aria-describedby="basic-addon1"
             onChange={e => setNote(e.target.value)}
             required

@@ -34,7 +34,7 @@ const Header = ({ data = [], i18n }) => {
 
       <div className="header__cart">
         <Link to="/cart">
-          <img src={trashIcon} alt="" />
+          <img src={trashIcon} alt="" className="trash-icon" />
         </Link>
         {countCartItems ? (
           <span className="header__cart-counter">{countCartItems}</span>

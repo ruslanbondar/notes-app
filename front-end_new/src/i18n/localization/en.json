@@ -12,5 +12,6 @@
     "text": "You will lose you notes"
   },
   "homeEmpty": "You have no active notes",
-  "cartEmpty": "Your trash cart is empty"
+  "cartEmpty": "Your trash cart is empty",
+  "clearButton": "Clear"
 }

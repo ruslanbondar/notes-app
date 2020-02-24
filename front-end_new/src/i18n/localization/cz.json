@@ -12,5 +12,6 @@
     "text": "Ztratíte vám poznámky"
   },
   "homeEmpty": "Nemáte žádné aktivní poznámky",
-  "cartEmpty": "Košík je prázdný"
+  "cartEmpty": "Košík je prázdný",
+  "clearButton": "Vyčistit"
 }

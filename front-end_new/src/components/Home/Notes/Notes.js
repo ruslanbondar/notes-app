@@ -46,13 +46,18 @@ const Notes = ({ updateNote, _id, description, title, completed, t }) => {
         <Card border="success" style={{ width: "335px" }}>
           <Card.Header className="notes-container__header">
             <div className="notes-container__icons">
-              <img src={editButton} alt="" onClick={() => setEditing(true)} />
-              <img src={deleteButton} alt="" onClick={() => moveToCart()} />
+              <img src={editButton} alt="" onClick={() => setEditing(true)} className="edit-note" />
+              <img
+                src={deleteButton}
+                alt=""
+                onClick={() => moveToCart()}
+                className="delete-note"
+              />
             </div>
           </Card.Header>
           <Card.Body>
-            <Card.Title>{title}</Card.Title>
-            <Card.Text>{description}</Card.Text>
+            <Card.Title className="note-title">{title}</Card.Title>
+            <Card.Text className="note-description">{description}</Card.Text>
           </Card.Body>
         </Card>
       ) : (
@@ -68,6 +73,7 @@ const Notes = ({ updateNote, _id, description, title, completed, t }) => {
                 aria-describedby="basic-addon1"
                 defaultValue={title}
                 onChange={e => setNewTitle(e.target.value)}
+                className="title-edit"
               />
             </InputGroup>
 
@@ -81,11 +87,12 @@ const Notes = ({ updateNote, _id, description, title, completed, t }) => {
                 aria-describedby="basic-addon1"
                 defaultValue={description}
                 onChange={e => setNote(e.target.value)}
+                className="description-edit"
               />
             </InputGroup>
 
             <div className="note-container__save-button">
-              <Button type="submit" variant="outline-primary">
+              <Button type="submit" variant="outline-primary" className="update-button">
                 {t("saveButton")}
               </Button>
             </div>

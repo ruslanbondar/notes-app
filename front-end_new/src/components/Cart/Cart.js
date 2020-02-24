@@ -27,7 +27,7 @@ const Cart = ({ data = [], getNotes, deleteAll, t }) => {
       {deletedNotes.length ? (
         <div className="clear-block">
           <Button variant="outline-danger" onClick={handleShow}>
-            Clear
+            {t("clearButton")}
           </Button>
         </div>
       ) : null}

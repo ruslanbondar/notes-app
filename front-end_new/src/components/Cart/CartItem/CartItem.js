@@ -25,8 +25,18 @@ const CartItem = ({
     <Card border="danger" style={{ width: "450px" }} className="cart-item">
       <Card.Header className="cart-item__header">
         <div className="cart-item__icons">
-          <img src={restoreIcon} alt="" onClick={() => moveFromCart()} />
-          <img src={deleteIcon} alt="" onClick={() => deleteNote(_id)} />
+          <img
+            src={restoreIcon}
+            alt=""
+            onClick={() => moveFromCart()}
+            className="restore-note"
+          />
+          <img
+            src={deleteIcon}
+            alt=""
+            onClick={() => deleteNote(_id)}
+            className="remove-note"
+          />
         </div>
       </Card.Header>
       <Card.Body>
