@@ -1,0 +1,16 @@
+{
+  "addForm": {
+    "addButton": "Přidat",
+    "title": "Nadpis",
+    "description": "Popis"
+  },
+  "saveButton": "Uložit",
+  "confirmModal": {
+    "confirmButton": "Potvrdit",
+    "cancelButton": "Zrušit",
+    "question": "Jsi si jistá?",
+    "text": "Ztratíte vám poznámky"
+  },
+  "homeEmpty": "Nemáte žádné aktivní poznámky",
+  "cartEmpty": "Košík je prázdný"
+}

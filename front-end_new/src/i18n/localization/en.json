@@ -1,0 +1,16 @@
+{
+  "addForm": {
+    "addButton": "Add",
+    "title": "Title",
+    "description": "Description"
+  },
+  "saveButton": "Save",
+  "confirmModal": {
+    "confirmButton": "Confirm",
+    "cancelButton": "Cancel",
+    "question": "Are you sure?",
+    "text": "You will lose you notes"
+  },
+  "homeEmpty": "You have no active notes",
+  "cartEmpty": "Your trash cart is empty"
+}

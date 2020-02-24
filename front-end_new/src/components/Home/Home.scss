@@ -1,0 +1,28 @@
+.home {
+  min-height: 500px;
+
+  &__card-container {
+    width: 700px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px 30px;
+  }
+
+  &__add-note-form {
+    width: 500px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__add-button {
+    width: 100px;
+  }
+
+  &__empty {
+    text-align: center;
+    margin: 140px 0;
+  }
+}

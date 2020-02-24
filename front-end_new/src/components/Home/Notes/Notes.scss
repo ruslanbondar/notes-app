@@ -1,0 +1,35 @@
+.notes-container {
+  &__no-editing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #000;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__icons {
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1, 1.1);
+      }
+    }
+  }
+
+  &__save-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

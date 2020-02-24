@@ -1,0 +1,19 @@
+.clear-block {
+  width: 450px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart {
+  width: 50%;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+
+.empty-cart {
+  text-align: center;
+  margin-top: 250px;
+}
