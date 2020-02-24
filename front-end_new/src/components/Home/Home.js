@@ -44,7 +44,7 @@ const Home = ({ getNotes, data = [], addNote, t }) => {
           ))}
         </div>
       ) : (
-        <h1 className="home__empty">{t('homeEmpty')}</h1>
+        <h1 className="home__empty">{t("homeEmpty")}</h1>
       )}
 
       <form onSubmit={submitChanges} className="home__add-note-form">

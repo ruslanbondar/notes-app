@@ -3,7 +3,7 @@ import "./CartItem.scss";
 import { connect } from "react-redux";
 import { deleteNote, updateNote } from "../../../store/actions/notes";
 import deleteIcon from "../../../assets/trash.svg";
-import restoreIcon from '../../../assets/restore.svg';
+import restoreIcon from "../../../assets/restore.svg";
 import { Card } from "react-bootstrap";
 
 const CartItem = ({

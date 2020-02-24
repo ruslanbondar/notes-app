@@ -39,7 +39,7 @@ const Cart = ({ data = [], getNotes, deleteAll, t }) => {
           ))}
         </div>
       ) : (
-        <h1 className="empty-cart">{t('cartEmpty')}</h1>
+        <h1 className="empty-cart">{t("cartEmpty")}</h1>
       )}
 
       <Modal show={show} onHide={handleClose}>
