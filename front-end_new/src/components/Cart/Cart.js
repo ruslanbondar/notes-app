@@ -5,8 +5,9 @@ import { getNotes, deleteAll } from "../../store/actions/notes";
 import CartItem from "./CartItem/CartItem";
 import { Button, Modal } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
+import Spinner from "../Spinner/Spinner";
 
-const Cart = ({ data = [], getNotes, deleteAll, t }) => {
+const Cart = ({ data = [], getNotes, deleteAll, t, loading }) => {
   const getNotesCallback = useCallback(() => {
     getNotes();
   }, [getNotes]);
@@ -33,11 +34,17 @@ const Cart = ({ data = [], getNotes, deleteAll, t }) => {
       ) : null}
 
       {deletedNotes.length ? (
-        <div className="cart">
-          {deletedNotes.map(note => (
-            <CartItem key={note._id} {...note} />
-          ))}
-        </div>
+        <>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <div className="cart">
+              {deletedNotes
+                .map(note => <CartItem key={note._id} {...note} />)
+                .reverse()}
+            </div>
+          )}
+        </>
       ) : (
         <h1 className="empty-cart">{t("cartEmpty")}</h1>
       )}
@@ -68,7 +75,8 @@ const Cart = ({ data = [], getNotes, deleteAll, t }) => {
 
 const mapStateToProps = state => {
   return {
-    data: state.data
+    data: state.data,
+    loading: state.loading
   };
 };
 

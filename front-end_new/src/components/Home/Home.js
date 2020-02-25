@@ -5,8 +5,9 @@ import { getNotes, addNote } from "../../store/actions/notes";
 import Notes from "./Notes/Notes";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
+import Spinner from "../Spinner/Spinner";
 
-const Home = ({ getNotes, data = [], addNote, t }) => {
+const Home = ({ getNotes, data = [], addNote, t, loading }) => {
   const getNotesCallback = useCallback(() => {
     getNotes();
   }, [getNotes]);
@@ -38,11 +39,17 @@ const Home = ({ getNotes, data = [], addNote, t }) => {
   return (
     <div className="home">
       {activeNotes.length ? (
-        <div className="home__card-container">
-          {activeNotes.map(note => (
-            <Notes {...note} key={note._id} />
-          ))}
-        </div>
+        <>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <div className="home__card-container">
+              {activeNotes
+                .map(note => <Notes {...note} key={note._id} />)
+                .reverse()}
+            </div>
+          )}
+        </>
       ) : (
         <h1 className="home__empty">{t("homeEmpty")}</h1>
       )}
@@ -90,7 +97,8 @@ const Home = ({ getNotes, data = [], addNote, t }) => {
 
 const mapStateToProps = state => {
   return {
-    data: state.data
+    data: state.data,
+    loading: state.loading
   };
 };
 
