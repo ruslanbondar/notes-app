@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import "./Cart.scss";
 import { connect } from "react-redux";
 import { getNotes, deleteAll } from "../../store/actions/notes";
-import CartItem from "./CartItem/CartItem";
+import CartItem from "./CartItem/CartItem.tsx";
 import { Button, Modal } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 import Spinner from "../Spinner/Spinner";

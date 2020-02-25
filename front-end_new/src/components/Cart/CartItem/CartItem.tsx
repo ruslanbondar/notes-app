@@ -6,6 +6,15 @@ import deleteIcon from "../../../assets/trash.svg";
 import restoreIcon from "../../../assets/restore.svg";
 import { Card } from "react-bootstrap";
 
+interface CartItemProps {
+  description: string
+  title: string,
+  completed: boolean
+  deleteNote: Function
+  updateNote: Function
+  _id: string
+}
+
 const CartItem = ({
   _id,
   description,
@@ -13,7 +22,7 @@ const CartItem = ({
   completed,
   deleteNote,
   updateNote
-}) => {
+}: CartItemProps) => {
   const moveFromCart = () => {
     const newData = {
       completed: !completed
