@@ -35,8 +35,8 @@ describe("Notes App", () => {
     const title = $(".note-title").getText();
     const description = $(".note-description").getText();
 
-    expect(title).to.equal(titleText);
-    expect(description).to.equal(descriptionText);
+    expect(title).to.equal(newTitleText);
+    expect(description).to.equal(newDescriptionText);
   });
 
   it("Should allow me to move Note to trash cart", () => {
