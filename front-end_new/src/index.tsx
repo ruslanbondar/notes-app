@@ -2,15 +2,10 @@ import React from "react";
 import "./index.scss";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { store } from "./store/store";
 import App from "./App";
-import reducer from "./store/reducers/notes";
-import thunk from "redux-thunk";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n/index";
-
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>

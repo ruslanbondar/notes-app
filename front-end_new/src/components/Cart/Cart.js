@@ -75,8 +75,8 @@ const Cart = ({ data = [], getNotes, deleteAll, t, loading }) => {
 
 const mapStateToProps = state => {
   return {
-    data: state.data,
-    loading: state.loading
+    data: state.notes.data,
+    loading: state.notes.loading
   };
 };
 

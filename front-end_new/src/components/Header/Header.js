@@ -46,7 +46,7 @@ const Header = ({ data = [], i18n }) => {
 
 const mapStateToProps = state => {
   return {
-    data: state.data
+    data: state.notes.data
   };
 };
 

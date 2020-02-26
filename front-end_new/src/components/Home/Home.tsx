@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, ReactNode } from "react";
 import { connect } from "react-redux";
 import "./Home.scss";
 import { getNotes, addNote } from "../../store/actions/notes";
@@ -6,8 +6,21 @@ import Notes from "./Notes/Notes";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 import Spinner from "../Spinner/Spinner";
+import { Note } from "types/note";
+import { AppState } from "store/store";
+import { AppActions } from "types/actions";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 
-const Home = ({ getNotes, data = [], addNote, t, loading }) => {
+interface HomeProps {
+  t: (key: string) => ReactNode
+}
+
+interface HomeState { }
+
+type Props = HomeProps & LinkStateProps & LinkDispatchProps;
+
+const Home: React.FunctionComponent<Props> = ({ getNotes, data = [], addNote, t, loading }) => {
   const getNotesCallback = useCallback(() => {
     getNotes();
   }, [getNotes]);
@@ -43,16 +56,16 @@ const Home = ({ getNotes, data = [], addNote, t, loading }) => {
           {loading ? (
             <Spinner />
           ) : (
-            <div className="home__card-container">
-              {activeNotes
-                .map(note => <Notes {...note} key={note._id} />)
-                .reverse()}
-            </div>
-          )}
+              <div className="home__card-container">
+                {activeNotes
+                  .map(note => <Notes {...note} key={note._id} />)
+                  .reverse()}
+              </div>
+            )}
         </>
       ) : (
-        <h1 className="home__empty">{t("homeEmpty")}</h1>
-      )}
+          <h1 className="home__empty">{t("homeEmpty")}</h1>
+        )}
 
       <form onSubmit={submitChanges} className="home__add-note-form">
         <InputGroup className="mb-3">
@@ -95,13 +108,30 @@ const Home = ({ getNotes, data = [], addNote, t, loading }) => {
   );
 };
 
-const mapStateToProps = state => {
+interface LinkStateProps {
+  data: Note[]
+  loading: boolean
+}
+
+interface LinkDispatchProps {
+  getNotes: () => void
+  addNote: (newData: object) => void
+}
+
+const mapStateToProps = (state: AppState, ownProps: HomeProps): LinkStateProps => {
   return {
-    data: state.data,
-    loading: state.loading
+    data: state.notes.data,
+    loading: state.notes.loading
   };
 };
 
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: HomeProps): LinkDispatchProps => {
+  return {
+    getNotes: bindActionCreators(getNotes, dispatch),
+    addNote: bindActionCreators(addNote, dispatch)
+  }
+}
+
 export default withTranslation()(
-  connect(mapStateToProps, { getNotes, addNote })(Home)
+  connect(mapStateToProps, mapDispatchToProps)(Home)
 );
