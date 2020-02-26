@@ -2,7 +2,21 @@ export interface Note {
   _id: string;
   title: string;
   description: string;
-  completed: false;
+  completed: boolean;
+}
+
+export interface NewNote {
+  title: string;
+  description: string;
+}
+
+export interface UpdatedNote {
+  title: string;
+  description: string;
+}
+
+export interface CompletedNote {
+  completed: boolean
 }
 
 export interface NoteState {

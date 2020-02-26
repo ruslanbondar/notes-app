@@ -6,7 +6,6 @@ const initialState: NoteState = {
   data: [],
   error: "",
   loading: false
-  // note: {}
 };
 
 const notesReducer = (
@@ -33,13 +32,6 @@ const notesReducer = (
         loading: false,
         error: action.error
       };
-
-    // case actionTypes.FETCH_SINGLE_NOTE:
-    //   return {
-    //     ...state,
-    //     note: action.data,
-    //     loading: false
-    //   };
 
     default:
       return state;

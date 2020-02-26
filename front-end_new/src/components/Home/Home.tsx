@@ -6,7 +6,7 @@ import Notes from "./Notes/Notes";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 import Spinner from "../Spinner/Spinner";
-import { Note } from "types/note";
+import { Note, NewNote } from "types/note";
 import { AppState } from "store/store";
 import { AppActions } from "types/actions";
 import { bindActionCreators } from "redux";
@@ -15,8 +15,6 @@ import { ThunkDispatch } from "redux-thunk";
 interface HomeProps {
   t: (key: string) => ReactNode
 }
-
-interface HomeState { }
 
 type Props = HomeProps & LinkStateProps & LinkDispatchProps;
 
@@ -29,11 +27,11 @@ const Home: React.FunctionComponent<Props> = ({ getNotes, data = [], addNote, t,
     getNotesCallback();
   }, [getNotesCallback]);
 
-  const [note, setNote] = useState();
-  const [title, setTitle] = useState();
+  const [note, setNote] = useState('');
+  const [title, setTitle] = useState('');
 
   const postNote = () => {
-    const newData = {
+    const newData: NewNote = {
       description: note,
       title
     };
@@ -115,7 +113,7 @@ interface LinkStateProps {
 
 interface LinkDispatchProps {
   getNotes: () => void
-  addNote: (newData: object) => void
+  addNote: (newData: NewNote) => void
 }
 
 const mapStateToProps = (state: AppState, ownProps: HomeProps): LinkStateProps => {

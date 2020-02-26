@@ -1,33 +1,37 @@
 import React from "react";
 import "./CartItem.scss";
 import { connect } from "react-redux";
-import { deleteNote, updateNote } from "../../../store/actions/notes";
+import { deleteNote, completeNote } from "../../../store/actions/notes";
 import deleteIcon from "../../../assets/trash.svg";
 import restoreIcon from "../../../assets/restore.svg";
 import { Card } from "react-bootstrap";
+import { AppActions } from "types/actions";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { CompletedNote } from "types/note";
 
-// interface CartItemProps {
-//   description: string
-//   title: string,
-//   completed: boolean
-//   deleteNote: Function
-//   updateNote: Function
-//   _id: string
-// }
+interface CartItemProps {
+  _id: string
+  description: string
+  title: string
+  completed: boolean
+}
 
-const CartItem = ({
+type Props = CartItemProps & LinkDispatchProps;
+
+const CartItem: React.FunctionComponent<Props> = ({
   _id,
   description,
   title,
   completed,
   deleteNote,
-  updateNote
+  completeNote
 }) => {
   const moveFromCart = () => {
     const newData = {
       completed: !completed
     };
-    updateNote(newData, _id);
+    completeNote(newData, _id);
   };
 
   return (
@@ -56,4 +60,16 @@ const CartItem = ({
   );
 };
 
-export default connect(null, { deleteNote, updateNote })(CartItem);
+interface LinkDispatchProps {
+  deleteNote: (_id: string) => void
+  completeNote: (newData: CompletedNote, _id: string) => void
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: CartItemProps): LinkDispatchProps => {
+  return {
+    deleteNote: bindActionCreators(deleteNote, dispatch),
+    completeNote: bindActionCreators(completeNote, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CartItem);

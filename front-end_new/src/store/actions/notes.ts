@@ -6,7 +6,6 @@ import { Dispatch } from "redux";
 export const FETCH_NOTES_REQUEST = "FETCH_NOTES_REQUEST";
 export const FETCH_NOTES_SUCCESS = "FETCH_NOTES_SUCCESS";
 export const FETCH_NOTES_FAILURE = "FETCH_NOTES_FAILURE";
-// export const FETCH_SINGLE_NOTE = "FETCH_SINGLE_NOTE";
 
 const fetchNotesRequest = (): AppActions => {
   return {
@@ -28,13 +27,6 @@ const fetchNotesFailure = (error: string): AppActions => {
   };
 };
 
-// const fetchSingleNote = data => {
-//   return {
-//     type: FETCH_SINGLE_NOTE,
-//     data
-//   };
-// };
-
 export const getNotes = () => {
   return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
@@ -48,20 +40,7 @@ export const getNotes = () => {
   };
 };
 
-// export const getSingleNote = id => {
-//   return async dispatch => {
-//     dispatch(fetchNotesRequest());
-
-//     try {
-//       const data = await notesAPI.getNoteById(id);
-//       dispatch(fetchSingleNote(data));
-//     } catch (error) {
-//       dispatch(fetchNotesFailure(error));
-//     }
-//   };
-// };
-
-export const addNote = (newData: object) => {
+export const addNote = (newData: {}) => {
   return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
 
@@ -75,7 +54,21 @@ export const addNote = (newData: object) => {
   };
 };
 
-export const updateNote = (newData: object, id: string) => {
+export const updateNote = (newData: {}, id: string) => {
+  return async (dispatch: Dispatch<AppActions>) => {
+    dispatch(fetchNotesRequest());
+
+    try {
+      await notesAPI.updateNote(newData, id);
+      const data = await notesAPI.getNotes();
+      dispatch(fetchNotesSuccess(data));
+    } catch (error) {
+      dispatch(fetchNotesFailure(error));
+    }
+  };
+};
+
+export const completeNote = (newData: {}, id: string) => {
   return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
 
