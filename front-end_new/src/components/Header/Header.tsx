@@ -17,8 +17,6 @@ type Props = HeaderProps & LinkStateProps;
 const Header: React.FunctionComponent<Props> = ({ data = [], i18n }) => {
   const countCartItems = data.filter(note => note.completed === true).length;
 
-  const { language, changeLanguage } = i18n;
-
   return (
     <div className="header">
       <Link to="/">
@@ -27,14 +25,14 @@ const Header: React.FunctionComponent<Props> = ({ data = [], i18n }) => {
 
       <div className="header__language-block">
         <span
-          style={{ fontWeight: language === "en" && "bold" } as React.CSSProperties}
-          onClick={() => changeLanguage("en")}
+          style={{ fontWeight: i18n.language === "en" && "bold" } as React.CSSProperties}
+          onClick={() => i18n.changeLanguage("en")}
         >
           EN
         </span>
         <span
-          style={{ fontWeight: language === "cz" && "bold" } as React.CSSProperties}
-          onClick={() => changeLanguage("cz")}
+          style={{ fontWeight: i18n.language === "cz" && "bold" } as React.CSSProperties}
+          onClick={() => i18n.changeLanguage("cz")}
         >
           CZ
         </span>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, ReactNode, FormEvent } from "react";
 import "./Notes.scss";
 import { connect } from "react-redux";
-import { updateNote, completeNote } from "../../../store/actions/notes";
+import { updateNote } from "../../../store/actions/notes";
 import deleteButton from "../../../assets/delete.svg";
 import editButton from "../../../assets/edit.svg";
 import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
-import { UpdatedNote, CompletedNote } from "types/note";
+import { UpdatedTitle, UpdatedDescription, CompletedNote } from "types/note";
 import { AppActions } from "types/actions";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
@@ -21,7 +21,7 @@ interface NotesProps {
 
 type Props = NotesProps & LinkDispatchProps;
 
-const Notes: React.FunctionComponent<Props> = ({ updateNote, _id, description, title, completed, t, completeNote }) => {
+const Notes: React.FunctionComponent<Props> = ({ updateNote, _id, description, title, completed, t }) => {
   const [editing, setEditing] = useState(false);
   const [note, setNote] = useState('');
   const [newTitle, setNewTitle] = useState('');
@@ -33,10 +33,16 @@ const Notes: React.FunctionComponent<Props> = ({ updateNote, _id, description, t
     }
   }, [note, newTitle]);
 
-  const setUpdate = () => {
-    const newData: UpdatedNote = {
-      description: note,
+  const updateTitle = () => {
+    const newData: UpdatedTitle = {
       title: newTitle
+    };
+    updateNote(newData, _id);
+  };
+
+  const updateDescription = () => {
+    const newData: UpdatedDescription = {
+      description: note
     };
     updateNote(newData, _id);
   };
@@ -45,11 +51,12 @@ const Notes: React.FunctionComponent<Props> = ({ updateNote, _id, description, t
     const newData: CompletedNote = {
       completed: !completed
     };
-    completeNote(newData, _id);
+    updateNote(newData, _id);
   };
 
   const submitChanges = (e: FormEvent<HTMLFormElement>) => {
-    setUpdate();
+    newTitle && updateTitle();
+    note && updateDescription();
     setEditing(false);
     e.preventDefault();
   };
@@ -118,14 +125,12 @@ const Notes: React.FunctionComponent<Props> = ({ updateNote, _id, description, t
 };
 
 interface LinkDispatchProps {
-  updateNote: (newData: UpdatedNote, _id: string) => void
-  completeNote: (newData: CompletedNote, _id: string) => void
+  updateNote: (newData: {}, _id: string) => void
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: NotesProps): LinkDispatchProps => {
   return {
-    updateNote: bindActionCreators(updateNote, dispatch),
-    completeNote: bindActionCreators(completeNote, dispatch)
+    updateNote: bindActionCreators(updateNote, dispatch)
   }
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./CartItem.scss";
 import { connect } from "react-redux";
-import { deleteNote, completeNote } from "../../../store/actions/notes";
+import { deleteNote, updateNote } from "../../../store/actions/notes";
 import deleteIcon from "../../../assets/trash.svg";
 import restoreIcon from "../../../assets/restore.svg";
 import { Card } from "react-bootstrap";
@@ -25,13 +25,13 @@ const CartItem: React.FunctionComponent<Props> = ({
   title,
   completed,
   deleteNote,
-  completeNote
+  updateNote
 }) => {
   const moveFromCart = () => {
-    const newData = {
+    const newData: CompletedNote = {
       completed: !completed
     };
-    completeNote(newData, _id);
+    updateNote(newData, _id);
   };
 
   return (
@@ -62,13 +62,13 @@ const CartItem: React.FunctionComponent<Props> = ({
 
 interface LinkDispatchProps {
   deleteNote: (_id: string) => void
-  completeNote: (newData: CompletedNote, _id: string) => void
+  updateNote: (newData: CompletedNote, _id: string) => void
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: CartItemProps): LinkDispatchProps => {
   return {
     deleteNote: bindActionCreators(deleteNote, dispatch),
-    completeNote: bindActionCreators(completeNote, dispatch)
+    updateNote: bindActionCreators(updateNote, dispatch)
   }
 }
 

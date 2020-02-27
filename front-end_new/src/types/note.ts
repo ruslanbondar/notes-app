@@ -10,8 +10,11 @@ export interface NewNote {
   description: string;
 }
 
-export interface UpdatedNote {
+export interface UpdatedTitle {
   title: string;
+}
+
+export interface UpdatedDescription {
   description: string;
 }
 

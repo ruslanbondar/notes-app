@@ -68,20 +68,6 @@ export const updateNote = (newData: {}, id: string) => {
   };
 };
 
-export const completeNote = (newData: {}, id: string) => {
-  return async (dispatch: Dispatch<AppActions>) => {
-    dispatch(fetchNotesRequest());
-
-    try {
-      await notesAPI.updateNote(newData, id);
-      const data = await notesAPI.getNotes();
-      dispatch(fetchNotesSuccess(data));
-    } catch (error) {
-      dispatch(fetchNotesFailure(error));
-    }
-  };
-};
-
 export const deleteNote = (id: string) => {
   return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
@@ -95,6 +81,7 @@ export const deleteNote = (id: string) => {
     }
   };
 };
+
 export const deleteAll = () => {
   return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
