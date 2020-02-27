@@ -1,39 +1,34 @@
 import { notesAPI } from "../../api/api";
+import { Note } from "../../types/note";
+import { AppActions } from "../../types/actions";
+import { Dispatch } from "redux";
 
 export const FETCH_NOTES_REQUEST = "FETCH_NOTES_REQUEST";
 export const FETCH_NOTES_SUCCESS = "FETCH_NOTES_SUCCESS";
 export const FETCH_NOTES_FAILURE = "FETCH_NOTES_FAILURE";
-export const FETCH_SINGLE_NOTE = "FETCH_SINGLE_NOTE";
 
-const fetchNotesRequest = () => {
+const fetchNotesRequest = (): AppActions => {
   return {
     type: FETCH_NOTES_REQUEST
   };
 };
 
-const fetchNotesSuccess = data => {
+const fetchNotesSuccess = (data: Note[]): AppActions => {
   return {
     type: FETCH_NOTES_SUCCESS,
     data
   };
 };
 
-const fetchNotesFailure = error => {
+const fetchNotesFailure = (error: string): AppActions => {
   return {
     type: FETCH_NOTES_FAILURE,
     error
   };
 };
 
-const fetchSingleNote = data => {
-  return {
-    type: FETCH_SINGLE_NOTE,
-    data
-  };
-};
-
 export const getNotes = () => {
-  return async dispatch => {
+  return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
 
     try {
@@ -45,21 +40,8 @@ export const getNotes = () => {
   };
 };
 
-export const getSingleNote = id => {
-  return async dispatch => {
-    dispatch(fetchNotesRequest());
-
-    try {
-      const data = await notesAPI.getNoteById(id);
-      dispatch(fetchSingleNote(data));
-    } catch (error) {
-      dispatch(fetchNotesFailure(error));
-    }
-  };
-};
-
-export const addNote = newData => {
-  return async dispatch => {
+export const addNote = (newData: {}) => {
+  return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
 
     try {
@@ -72,8 +54,8 @@ export const addNote = newData => {
   };
 };
 
-export const updateNote = (newData, id) => {
-  return async dispatch => {
+export const updateNote = (newData: {}, id: string) => {
+  return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
 
     try {
@@ -86,8 +68,8 @@ export const updateNote = (newData, id) => {
   };
 };
 
-export const deleteNote = id => {
-  return async dispatch => {
+export const deleteNote = (id: string) => {
+  return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
 
     try {
@@ -98,10 +80,10 @@ export const deleteNote = id => {
       dispatch(fetchNotesFailure(error));
     }
   };
-}
-;
+};
+
 export const deleteAll = () => {
-  return async dispatch => {
+  return async (dispatch: Dispatch<AppActions>) => {
     dispatch(fetchNotesRequest());
 
     try {

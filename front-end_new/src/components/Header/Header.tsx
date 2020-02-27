@@ -5,8 +5,16 @@ import { connect } from "react-redux";
 import homeIcon from "../../assets/home.svg";
 import trashIcon from "../../assets/trash-header.svg";
 import { withTranslation } from "react-i18next";
+import { Note } from "types/note";
+import { AppState } from "store/store";
 
-const Header = ({ data = [], i18n }) => {
+interface HeaderProps {
+  i18n: { language: string, changeLanguage: (key: string) => void }
+}
+
+type Props = HeaderProps & LinkStateProps;
+
+const Header: React.FunctionComponent<Props> = ({ data = [], i18n }) => {
   const countCartItems = data.filter(note => note.completed === true).length;
 
   return (
@@ -17,16 +25,14 @@ const Header = ({ data = [], i18n }) => {
 
       <div className="header__language-block">
         <span
-          style={{ fontWeight: i18n.language === "en" && "bold" }}
+          style={{ fontWeight: i18n.language === "en" && "bold" } as React.CSSProperties}
           onClick={() => i18n.changeLanguage("en")}
         >
           EN
         </span>
         <span
-          style={{ fontWeight: i18n.language === "cz" && "bold" }}
-          onClick={() => {
-            i18n.changeLanguage("cz");
-          }}
+          style={{ fontWeight: i18n.language === "cz" && "bold" } as React.CSSProperties}
+          onClick={() => i18n.changeLanguage("cz")}
         >
           CZ
         </span>
@@ -44,9 +50,13 @@ const Header = ({ data = [], i18n }) => {
   );
 };
 
-const mapStateToProps = state => {
+interface LinkStateProps {
+  data: Note[]
+}
+
+const mapStateToProps = (state: AppState, ownProps: HeaderProps): LinkStateProps => {
   return {
-    data: state.data
+    data: state.notes.data
   };
 };
 
